@@ -1,5 +1,6 @@
 package com.utility;
 //Author = Yuvraj
+//Server version: 5.1.36-community-log MySQL Community Server (GPL)
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
