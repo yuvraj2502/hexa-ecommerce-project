@@ -1,5 +1,5 @@
 package com.daoImpl;
-
+//Author = Yuvraj
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -24,7 +24,7 @@ public class UserDaoImpl implements UserDao{
 		 
 		if(rst.next()) {
 			User user = new User();
-			user.setId(rst.getInt("user_id"));
+			user.setUserId(rst.getInt("user_id"));
 			user.setEmail(email);
 			user.setPassword(password);
 			user.setRole(rst.getString("role"));
@@ -37,5 +37,21 @@ public class UserDaoImpl implements UserDao{
 		}
 		
 		 
+	}
+	
+	public int save(User user) throws SQLException {
+		Connection con = DBConnection.dbConnect();
+		String sql = "INSERT INTO user (user_id, email, password, role) VALUES (?,?,?,?)";
+		
+		PreparedStatement pstmt = con.prepareStatement(sql);
+		
+		pstmt.setInt(1, user.getUserId());
+		pstmt.setString(2, user.getEmail());
+		pstmt.setString(3, user.getPassword());
+		pstmt.setString(4, user.getRole());
+
+		int status = pstmt.executeUpdate(); 
+		DBConnection.dbClose();
+		return status;
 	}
 }
