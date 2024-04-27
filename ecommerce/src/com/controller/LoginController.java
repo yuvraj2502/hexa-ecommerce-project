@@ -41,6 +41,7 @@ public class LoginController {
 						System.out.println("Customer Menu");
 					} else if(userObj.getRole().equalsIgnoreCase("VENDOR")){
 						System.out.println("Vendor Menu");
+						VendorController.vendorMenu();
 					}else {
 						System.out.println("Admin Menu");
 						AdminController.adminMenu();
