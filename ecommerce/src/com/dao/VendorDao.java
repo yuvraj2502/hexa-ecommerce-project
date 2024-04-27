@@ -20,10 +20,15 @@ public interface VendorDao {
 	
 	void updateStockQuantity(int productId, int newQuantity)throws SQLException; //4
 
+	boolean findOnep(int productId) throws SQLException,ResourceNotFoundException;//4
+
 	
 	List<Orders> findAllo() throws SQLException;   //5
 	
 	void updateOrderStatus(int proId, String orderStatus)throws SQLException;   //6
+	
+	boolean findOneo(int proid)throws SQLException,ResourceNotFoundException; //6
+
 
 	List<PaymentDto> getCheckPayment() throws SQLException;//7
 	

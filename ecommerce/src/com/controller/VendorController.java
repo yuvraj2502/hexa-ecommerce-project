@@ -215,7 +215,7 @@ public class VendorController {
 			}
 
 		}
-		sc.close();
+		//sc.close();
 
 	}
 

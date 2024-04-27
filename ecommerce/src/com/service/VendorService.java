@@ -43,7 +43,7 @@ public class VendorService {
 // 4
 	public void updateStockQuantity(int productId, int newQuantity) throws SQLException, ResourceNotFoundException  {
 			// TODO Auto-generated method stub
-		boolean isIdValid = dao.findOne(productId);
+		boolean isIdValid = dao.findOnep(productId);
 		if(!isIdValid)
 			throw new ResourceNotFoundException("Id given is Invalid!!");
 		dao.updateStockQuantity(productId, newQuantity);
@@ -59,7 +59,7 @@ public class VendorService {
 //6
 	public void updateOrderStatus(int proId, String orderStatus)throws SQLException, ResourceNotFoundException {
 		// TODO Auto-generated method stub
-		boolean isIdValid = dao.findOne(proId);
+		boolean isIdValid = dao.findOneo(proId);
 		if(!isIdValid)
 			throw new ResourceNotFoundException("Id given is Invalid!!");
 		dao.updateOrderStatus(proId,orderStatus);

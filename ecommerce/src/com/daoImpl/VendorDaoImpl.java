@@ -112,6 +112,21 @@ public class VendorDaoImpl implements VendorDao {
 		
 	}
 	
+//4
+	@Override         
+	public boolean findOnep(int productId) throws SQLException,ResourceNotFoundException {
+		// TODO Auto-generated method stub
+		Connection con = DBConnection.dbConnect();
+		String sql="select product_id from product where product_id=?";
+		//prepare the statement 
+		PreparedStatement pstmt = con.prepareStatement(sql);
+		pstmt.setInt(1, productId);
+		ResultSet rst  = pstmt.executeQuery();
+		boolean status = rst.next(); 
+		DBConnection.dbClose();
+		return status;
+	}
+	
 //5	
 	@Override                   
 	public List<Orders> findAllo() throws SQLException{
@@ -149,7 +164,22 @@ public class VendorDaoImpl implements VendorDao {
 			
 		DBConnection.dbClose();
 			
-	}	
+	}
+//6	
+	@Override         
+	public boolean findOneo(int proId) throws SQLException,ResourceNotFoundException {
+		// TODO Auto-generated method stub
+		Connection con = DBConnection.dbConnect();
+		String sql="select product_id from orders where product_id=?";
+		//prepare the statement 
+		PreparedStatement pstmt = con.prepareStatement(sql);
+		pstmt.setInt(1, proId);
+		ResultSet rst  = pstmt.executeQuery();
+		boolean status = rst.next(); 
+		DBConnection.dbClose();
+		return status;
+	}
+
 //7
 	@Override                   
 	public List<PaymentDto> getCheckPayment() throws SQLException{
