@@ -1,5 +1,5 @@
 package com.service;
-
+//Author = Yuvraj
 import java.sql.SQLException;
 
 import com.dao.UserDao;
@@ -18,6 +18,10 @@ public class UserService {
 			throw new InvalidCredentialsException("Login Failed!");
 		}
 		return user;
+	}
+	
+	public void save(User user) throws SQLException {
+		userDao.save(user);
 	}
 	
 }

@@ -1,5 +1,6 @@
 package com.controller;
 
+// Author = Yuvraj
 import java.sql.SQLException;
 import java.util.Scanner;
 
@@ -8,14 +9,14 @@ import com.exception.InvalidCredentialsException;
 import com.model.User;
 import com.service.UserService;
 
-public class AuthController {
+public class LoginController {
 
 	public static void main(String[] args) {
 		Scanner sc = new Scanner(System.in);
 		UserService userService = new UserService();
 
 		while (true) {
-			System.out.println("Welcome to the Ecommerce.\n");
+			System.out.println("\nWelcome to the Ecommerce.\n");
 			System.out.println("Press 1. Login");
 			System.out.println("Press 0. Exit");
 			System.out.print("Enter a number to continue : ");
@@ -28,7 +29,7 @@ public class AuthController {
 			switch (input) {
 			case 1:
 				try {
-					System.out.print("Enter Email: ");
+					System.out.print("\nEnter Email: ");
 					sc.nextLine();
 					String email = sc.next();
 					System.out.print("Enter password: ");
@@ -42,6 +43,7 @@ public class AuthController {
 						System.out.println("Vendor Menu");
 					}else {
 						System.out.println("Admin Menu");
+						AdminController.adminMenu();
 					}
 					
 				} catch (SQLException e) {

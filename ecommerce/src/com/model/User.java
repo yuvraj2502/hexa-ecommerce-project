@@ -1,28 +1,28 @@
 package com.model;
-
+//Author = Yuvraj
 public class User {
-	private int id; 
+	private int userId; 
 	private String email; 
 	private String password; 
 	private String role;
-	public User(int id, String email, String password, String role) {
+	
+	public User() {
+	}
+
+	public User(int userId, String email, String password, String role) {
 		super();
-		this.id = id;
+		this.userId = userId;
 		this.email = email;
 		this.password = password;
 		this.role = role;
-	} 
-	
-	public User() {
-		// TODO Auto-generated constructor stub
 	}
 
-	public int getId() {
-		return id;
+	public int getUserId() {
+		return userId;
 	}
 
-	public void setId(int id) {
-		this.id = id;
+	public void setUserId(int userId) {
+		this.userId = userId;
 	}
 
 	public String getEmail() {
@@ -48,10 +48,11 @@ public class User {
 	public void setRole(String role) {
 		this.role = role;
 	}
-	
+
 	@Override
 	public String toString() {
-		// TODO Auto-generated method stub
-		return super.toString();
+		return "User [userId=" + userId + ", email=" + email + ", password=" + password + ", role=" + role + "]";
 	}
+	
+	
 }
