@@ -54,4 +54,23 @@ public class UserDaoImpl implements UserDao{
 		DBConnection.dbClose();
 		return status;
 	}
+	 @Override
+	    public int getCustomerIdByUserId(int userId) throws SQLException {
+		 Connection con = DBConnection.dbConnect();   
+		 String sql = "SELECT customer_id FROM customer WHERE user_id = ?";
+		 PreparedStatement pstmt = con.prepareStatement(sql);
+		
+	        int customerId = -1; 
+       pstmt.setInt(1, userId);
+	            ResultSet rst  = pstmt.executeQuery();
+
+	            rst = pstmt.executeQuery();
+
+	            if (rst.next()) {
+	                customerId = rst.getInt("customer_id");
+	            }
+	        
+	            DBConnection.dbClose();
+	        return customerId;
+	    }
 }
