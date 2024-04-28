@@ -1,4 +1,5 @@
 package com.controller;
+
 //Author = Yuvraj
 import java.sql.SQLException;
 import java.util.InputMismatchException;
@@ -25,21 +26,23 @@ public class AdminController {
 		UserService userService = new UserService();
 		AdminService adminService = new AdminService();
 
-		try {
-			while (true) {
-				System.out.println("\nAdmin Dashboard\n");
-				System.out.println("1. Show all Customer");
-				System.out.println("2. Show all Vendor");
-				System.out.println("3. Add a new Vendor");
-				System.out.println("4. Delete Customer");
-				System.out.println("5. Delete Vendor");
-				System.out.println("6. Show all products by vendorId");
-				System.out.println("7. Show Order Stats");
-				System.out.println("8. Logout");
-				System.out.println();
-				System.out.print("Press a number to continue: ");
+		while (true) {
 
-				// Taking user input to process
+			System.out.println("\nAdmin Dashboard\n");
+			System.out.println("1. Show all Customer");
+			System.out.println("2. Show all Vendor");
+			System.out.println("3. Add a new Vendor");
+			System.out.println("4. Delete Customer");
+			System.out.println("5. Delete Vendor");
+			System.out.println("6. Show all products by vendorId");
+			System.out.println("7. Show Order Stats");
+			System.out.println("8. Logout");
+			System.out.println();
+			System.out.print("Press a number to continue: ");
+
+			// Taking user input to process
+
+			try {
 				int input = sc.nextInt();
 				System.out.println();
 
@@ -110,7 +113,7 @@ public class AdminController {
 					System.out.print("Enter Email : ");
 					user.setEmail(sc.next());
 
-					System.out.print("Enter Password : ");
+					System.out.print("Enter Temporary Password : ");
 					user.setPassword(sc.next());
 
 					sc.nextLine();
@@ -281,15 +284,18 @@ public class AdminController {
 				default:
 					System.out.println("Invalid Input");
 				}
+
+			} catch (InputMismatchException e) {
+				System.out.println("Invalid input. Please enter a valid number.");
+				sc.next();
+				continue;
 			}
-		} catch (InputMismatchException e) {
-			System.out.println(e.getMessage());
 		}
-		//sc.close();
+		// sc.close();
 	}
-	
+
 	public static void adminMenu() {
-		String[] args = {""};
+		String[] args = { "" };
 		main(args);
 	}
 }
