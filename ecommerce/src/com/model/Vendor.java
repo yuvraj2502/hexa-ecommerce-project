@@ -6,7 +6,7 @@ public class Vendor {
 	private String businessName ;
 	private String vendorAddress;
 	private String vendorName;
-
+	private boolean isLoginFirst;
 
 	public Vendor() {
 		
@@ -59,6 +59,16 @@ public class Vendor {
 
 	public void setVendorName(String vendorName) {
 		this.vendorName = vendorName;
-	}	
+	}
+
+	public boolean getIsLoginFirst() {
+		return isLoginFirst;
+	}
+
+	public void setLoginFirst(boolean isLoginFirst) {
+		this.isLoginFirst = isLoginFirst;
+	}
+
+	
 	
 }
