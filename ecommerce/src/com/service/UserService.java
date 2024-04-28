@@ -23,5 +23,8 @@ public class UserService {
 	public void save(User user) throws SQLException {
 		userDao.save(user);
 	}
+	  public int getCustomerIdByUserId(int userId) throws SQLException {
+	        return userDao.getCustomerIdByUserId(userId);
+	    }
 	
 }

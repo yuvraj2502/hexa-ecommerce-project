@@ -36,9 +36,10 @@ public class LoginController {
 					String password = sc.next();
 
 					User userObj = userService.login(email, password);
-					
+					 int customerId = userService.getCustomerIdByUserId(userObj.getUserId()); // customer module
 					if (userObj.getRole().equalsIgnoreCase("CUSTOMER")) {
 						System.out.println("Customer Menu");
+						CustomerController.customerMenu(customerId);
 					} else if(userObj.getRole().equalsIgnoreCase("VENDOR")){
 						System.out.println("Vendor Menu");
 						VendorController.vendorMenu();
