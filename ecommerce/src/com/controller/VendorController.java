@@ -1,5 +1,5 @@
 package com.controller;
-
+// Author- Vibhuti Shrivastava
 import java.sql.SQLException;
 import com.model.Orders;
 import java.util.List;
@@ -50,7 +50,7 @@ public class VendorController {
 				sc.nextLine();
 				String name = sc.nextLine();
 
-				/* Reading description and assigning to product obj */
+				
 				System.out.println("Enter Description");
 				String description = sc.nextLine();
 
@@ -191,7 +191,7 @@ public class VendorController {
 				try {
 					List<PaymentDto> list = vendorService.getCheckPayment();
 					for (PaymentDto p : list) {
-						// System.out.println(v.getPaymentId(),v.getDate(),v.getModeOfPayment(),v.getAmount(),v.getOrderId(),v.getOrderDate(),v.getStatus());
+						
 						System.out.println(p);
 					}
 				} catch (SQLException e) {
