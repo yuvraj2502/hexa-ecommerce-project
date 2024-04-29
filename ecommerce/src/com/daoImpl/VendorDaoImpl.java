@@ -1,4 +1,5 @@
 package com.daoImpl;
+//Author- Vibhuti Shrivastava
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -35,7 +36,7 @@ public class VendorDaoImpl implements VendorDao {
 		pstmt.setInt(7, product.getCategory_id());
 		pstmt.setInt(8, product.getVendor_id());
 		//execute the query 
-		int status = pstmt.executeUpdate(); //1: if all good., 0 - if op fails 
+		int status = pstmt.executeUpdate(); // for insert,update, delete 
 		System.out.println(status);
 		DBConnection.dbClose();
 		
@@ -65,7 +66,7 @@ public class VendorDaoImpl implements VendorDao {
 		//prepare the statement 
 		PreparedStatement pstmt = con.prepareStatement(sql);
 		pstmt.setInt(1, id);
-		ResultSet rst  = pstmt.executeQuery();
+		ResultSet rst  = pstmt.executeQuery();// use with select and returns resultset
 		boolean status = rst.next(); 
 		DBConnection.dbClose();
 		return status;

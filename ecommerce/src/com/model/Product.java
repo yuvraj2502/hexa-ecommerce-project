@@ -1,4 +1,5 @@
 package com.model;
+//Author- Vibhuti Shrivastava
 
 public class Product {
 	private int product_id;
