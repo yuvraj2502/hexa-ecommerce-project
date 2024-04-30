@@ -14,12 +14,14 @@ import com.dto.ListRefundbyOrderDto;
 import com.dto.Listorderwithproduct;
 import com.dto.OrderPaymentRefund;
 import com.exception.ResourceNotFoundException;
+import com.model.Address;
 import com.model.Cart;
 import com.model.Category;
 import com.model.Order;
 import com.model.Payment;
 import com.model.Product;
 import com.model.Review;
+import com.service.AddressService;
 import com.service.CartService;
 import com.service.CategoryService;
 import com.service.CustomerService;
@@ -30,7 +32,7 @@ import com.service.RefundService;
 import com.service.ReviewService;
 
 public class CustomerController {
-    public static void main(String[] args, int customerId) {
+    public static void main(String[] args, int customerId) throws SQLException {
 		Scanner sc=new Scanner(System.in);
 		CustomerService customerService=new CustomerService();
 		ProductService productService=new ProductService();
@@ -40,6 +42,7 @@ public class CustomerController {
 		CartService cartService=new CartService();
 		RefundService refundService=new RefundService();
 		PaymentService paymentService=new PaymentService();
+		AddressService addressService = new AddressService();
 		System.out.println("Customer ID: " + customerId);
 		
 		while (true) {
@@ -61,6 +64,8 @@ public class CustomerController {
 			System.out.println("press 15: View Refund");                                              //sunitha
 			System.out.println("press 16: Write review");                                             //sunitha
 			System.out.println("press 17: OrderPaymentReview details");                               //sunitha
+			System.out.println("Press 18: Update Customer Address for existing customer");			  //swarna
+			System.out.println("Press 19: Add address if your a new Customer");                       //swarna
 			System.out.println("press 0: Exit");
 			
 			
@@ -83,7 +88,7 @@ public class CustomerController {
 					System.out.println(e.getMessage());
 				}
 				break;
-				
+			
 			case 2:
 				
 				try {
@@ -551,6 +556,52 @@ public class CustomerController {
 		        	System.out.println(e.getMessage());
 		        }
 		        break;
+			case 18:
+				Address add = new Address();
+				List<Address> listAdd = addressService.findAll(customerId);
+				for(Address ad : listAdd) {
+					System.out.println(ad);
+					sc.nextLine();
+				}
+				
+				System.out.println("Enter new Street : ");
+				add.setStreet(sc.nextLine());
+				
+				System.out.println("Enter new city");
+				add.setCity(sc.nextLine());
+				System.out.println("Enter new State");
+				add.setState(sc.nextLine());
+				System.out.println("Enter new Country");
+				add.setCountry(sc.nextLine());
+				System.out.println("Enter new Pincode");
+				add.setPincode(sc.nextInt());
+				
+				add.setCustomer_id(customerId);
+				
+				addressService.updateAddress(add);
+				System.out.println("Address of the existing customer updated...");
+	
+				break;
+			case 19:
+				Address adr = new Address();
+				
+				Random random = new Random(); 
+				int randomNumber = random.nextInt(); 
+				int id =randomNumber<0?randomNumber*-1:randomNumber;
+				adr.setAddress_id(id);
+				adr.setCustomer_id(customerId);
+				System.out.println("Enter Your Street");
+				adr.setStreet(sc.nextLine());
+				System.out.println("Enter Your City");
+				adr.setCity(sc.nextLine());
+				System.out.println("Enter Your Country");
+				adr.setCountry(sc.nextLine());
+				System.out.println("Enter Your Pincode");
+				adr.setPincode(sc.nextInt());
+				
+				addressService.save(adr);
+				System.out.println("Your address has been added...");
+				break;
 
 	}
 		
@@ -559,7 +610,7 @@ public class CustomerController {
 		//sc.close();
 }
 
-public static void customerMenu(int customerId)  {
+public static void customerMenu(int customerId) throws SQLException  {
 	String[] args = { "" };
 	main(args, customerId);
 }

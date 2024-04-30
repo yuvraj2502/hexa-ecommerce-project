@@ -1,5 +1,5 @@
 package com.model;
-
+//author - swarna & sunitha
 public class Order {
 	private int order_id;
     private int quantity;

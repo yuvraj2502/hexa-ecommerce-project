@@ -1,5 +1,5 @@
 package com.dao;
-//AUTHOR SWARNALAKSHMI AND SUNITHA
+//AUTHOR SWARNALAKSHMI 
 import java.sql.SQLException;
 import java.util.List;
 

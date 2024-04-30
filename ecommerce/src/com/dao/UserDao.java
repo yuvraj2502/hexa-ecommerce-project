@@ -12,7 +12,7 @@ public interface UserDao {
 
 	User login(String username, String password) throws SQLException;
 
-	int getCustomerIdByUserId(int userId) throws SQLException;
+	int getCustomerIdByUserId(int userId) throws SQLException;//customerId
 	
 	int saveCustomer(Customer customer) throws SQLException;
 

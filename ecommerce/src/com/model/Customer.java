@@ -1,5 +1,5 @@
 package com.model;
-
+//author - swarna
 public class Customer {
 
 private int customer_id;

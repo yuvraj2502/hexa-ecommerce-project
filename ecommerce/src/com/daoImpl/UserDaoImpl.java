@@ -55,7 +55,7 @@ public class UserDaoImpl implements UserDao {
 		return status;
 	}
 
-	@Override
+	@Override            //customer_module
 	public int getCustomerIdByUserId(int userId) throws SQLException {
 		Connection con = DBConnection.dbConnect();
 		String sql = "SELECT customer_id FROM customer WHERE user_id = ?";
