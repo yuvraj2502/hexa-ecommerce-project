@@ -63,6 +63,36 @@ public class PaymentDaoImpl implements PaymentDao {
 		
 	}
 
+	@Override
+	public double checkamount(int order_id) throws SQLException, ResourceNotFoundException {
+		// TODO Auto-generated method stub
+		Connection con=DBConnection.dbConnect();
+		String sql=" SELECT total_price from orders where order_id=? ";
+		PreparedStatement pstmt= con.prepareStatement(sql);
+		pstmt.setInt(1, order_id);
+		ResultSet rst=pstmt.executeQuery();
+		if(!rst.next()) {
+			throw new ResourceNotFoundException("no data found");
+		}
+		double total_price=rst.getDouble("total_price");
+		DBConnection.dbClose();
+		
+		return total_price;
+	}
+
+	@Override
+	public boolean orderidcheck(int order_id) throws SQLException, ResourceNotFoundException {
+		// TODO Auto-generated method stub
+		Connection con=DBConnection.dbConnect();
+		String sql=" SELECT order_id from payment where order_id=? ";
+		PreparedStatement pstmt= con.prepareStatement(sql);
+		pstmt.setInt(1, order_id);
+		ResultSet rst=pstmt.executeQuery();
+		boolean status=rst.next();
+		DBConnection.dbClose();
+		return status;
+	}
+
 	
 	
 

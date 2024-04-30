@@ -1,5 +1,5 @@
 package com.controller;
-//Author - Swarna & Sunitha
+//AUTHOR SUNITHA AND SWARNALAKSHMI
 import java.sql.SQLException;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
@@ -346,12 +346,13 @@ public class CustomerController {
 					
 					double totalPrice1 = productService.calculateTotalPrice1(product1.getProduct_id(), stock_quantity);
 					
-			           System.out.println("TotalPrice:" +totalPrice1);
-					
+			        System.out.println("TotalPrice:" +totalPrice1);
+					order.setTotal_price(totalPrice1);
 					
 					LocalDate currentDate = LocalDate.now();
-			        String order_date = currentDate.format(DateTimeFormatter.ISO_LOCAL_DATE); 
-				    System.out.println("Enter order_date:" + order_date);
+			        String order_date = currentDate.format(DateTimeFormatter.ISO_LOCAL_DATE);
+			        order.setOrder_date(order_date);
+			        System.out.println("Enter order_date:" + order_date);
 				    
 					order.setCustomer_id(customerId);
 					sc.nextLine();
@@ -439,7 +440,7 @@ public class CustomerController {
 					int order_id=sc.nextInt();
 					sc.nextLine();
 					orderService.findorderforcustomer(customerId,order_id);
-					//paymentService.checkorderinpayment(order_id);
+					paymentService.checkorderid(order_id);
 					
 					LocalDate currentDate = LocalDate.now(); 
 					String payment_date = currentDate.format(DateTimeFormatter.ISO_LOCAL_DATE); 
@@ -448,10 +449,12 @@ public class CustomerController {
 					
 					System.out.println("Enter payment_type");
 					String payment_type=sc.nextLine();
-					sc.nextLine();
+					
 					
 				    System.out.println("Enter payment_amount");
 				    double payment_amount=sc.nextDouble();
+				    paymentService.checkpaymentamount(payment_amount,order_id);
+				   
 				   
 				    Payment payment=new Payment(id,payment_date,payment_type,payment_amount,order_id);
 				    int status=paymentService.insert(payment);
