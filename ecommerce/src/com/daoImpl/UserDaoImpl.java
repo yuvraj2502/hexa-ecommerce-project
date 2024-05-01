@@ -55,7 +55,7 @@ public class UserDaoImpl implements UserDao {
 		return status;
 	}
 
-	@Override            //customer_module
+	@Override // customer_module
 	public int getCustomerIdByUserId(int userId) throws SQLException {
 		Connection con = DBConnection.dbConnect();
 		String sql = "SELECT customer_id FROM customer WHERE user_id = ?";
@@ -94,8 +94,7 @@ public class UserDaoImpl implements UserDao {
 	@Override
 	public Vendor getVendorById(int userId) throws SQLException {
 		Connection con = DBConnection.dbConnect();
-		String sql = "select v.* from vendor v JOIN user u "
-				+ "on u.user_id = v.user_id where u.user_id=?";
+		String sql = "select v.* from vendor v JOIN user u " + "on u.user_id = v.user_id where u.user_id=?";
 
 		PreparedStatement pstmt = con.prepareStatement(sql);
 		pstmt.setInt(1, userId);
@@ -134,11 +133,26 @@ public class UserDaoImpl implements UserDao {
 		String sql = "update user set password = ? where user_id=?";
 
 		PreparedStatement pstmt = con.prepareStatement(sql);
-		pstmt.setString(1,updatedUser.getPassword());
+		pstmt.setString(1, updatedUser.getPassword());
 		pstmt.setInt(2, updatedUser.getUserId());
 
 		pstmt.executeUpdate();
 		DBConnection.dbClose();
+	}
+
+	@Override
+	public boolean isEmailAlreadyExist(String email) throws SQLException {
+		Connection con = DBConnection.dbConnect();
+		String sql = "select user_id from user where email=?";
+
+		PreparedStatement pstmt = con.prepareStatement(sql);
+		pstmt.setString(1, email);
+
+		ResultSet rst = pstmt.executeQuery();
+		boolean status = rst.next();
+
+		DBConnection.dbClose();
+		return status;
 	}
 
 }

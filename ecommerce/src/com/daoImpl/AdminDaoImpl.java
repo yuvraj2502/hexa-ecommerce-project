@@ -1,4 +1,5 @@
 package com.daoImpl;
+
 //Author = Yuvraj
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -21,8 +22,7 @@ public class AdminDaoImpl implements AdminDao {
 	@Override
 	public List<CustomerDto> getAllCustomer() throws SQLException {
 		Connection con = DBConnection.dbConnect();
-		String sql = "select c.customer_id ,c.name ,u.email"
-				+ " from customer c Join user u on u.user_id = c.user_id "
+		String sql = "select c.customer_id ,c.name ,u.email" + " from customer c Join user u on u.user_id = c.user_id "
 				+ " and c.isActive='yes' ";
 
 		PreparedStatement pstmt = con.prepareStatement(sql);
@@ -104,8 +104,7 @@ public class AdminDaoImpl implements AdminDao {
 	public List<OrderStatsDto> getOrderStats() throws SQLException {
 		Connection con = DBConnection.dbConnect();
 		String sql = " select c.name ,c.customer_id ,count(o.order_id) as no_of_orders"
-				+ " from customer c Left JOIN orders o"
-				+ " ON c.customer_id = o.customer_id "
+				+ " from customer c Left JOIN orders o" + " ON c.customer_id = o.customer_id "
 				+ "where c.isActive='yes' group by c.customer_id;";
 
 		PreparedStatement pstmt = con.prepareStatement(sql);
@@ -116,8 +115,8 @@ public class AdminDaoImpl implements AdminDao {
 			String name = rst.getString("name");
 			int customerId = rst.getInt("customer_id");
 			int noOfOrders = rst.getInt("no_of_orders");
-			
-			OrderStatsDto orders = new OrderStatsDto(customerId,name,noOfOrders);
+
+			OrderStatsDto orders = new OrderStatsDto(customerId, name, noOfOrders);
 			list.add(orders);
 		}
 
@@ -144,8 +143,7 @@ public class AdminDaoImpl implements AdminDao {
 
 		return status;
 	}
-	
-	
+
 	@Override
 	public int softDeleteVendorById(int id) throws SQLException {
 		Connection con = DBConnection.dbConnect();
@@ -159,7 +157,6 @@ public class AdminDaoImpl implements AdminDao {
 
 		return status;
 	}
-	
 
 	@Override
 	public boolean findOneVendor(int id) throws SQLException, ResourceNotFoundException {
@@ -175,17 +172,13 @@ public class AdminDaoImpl implements AdminDao {
 		DBConnection.dbClose();
 		return status;
 	}
-	
-
 
 	@Override
 	public List<ProductDto> getAllProduct(int id) throws SQLException {
 		Connection con = DBConnection.dbConnect();
-		String sql ="select distinct p.name,p.description,p.price,"
-				+ "p.offer_percent,p.stock_quantity ,c.name as category "
-				+ "from product p Join category c ON "
+		String sql = "select distinct p.name,p.description,p.price,"
+				+ "p.offer_percent,p.stock_quantity ,c.name as category " + "from product p Join category c ON "
 				+ "p.category_id = c.category_id where vendor_id = ?";
-		
 
 		PreparedStatement pstmt = con.prepareStatement(sql);
 		pstmt.setInt(1, id);
@@ -198,9 +191,9 @@ public class AdminDaoImpl implements AdminDao {
 			double price = rst.getDouble("price");
 			int offerPercent = rst.getInt("offer_percent");
 			int stockQuanity = rst.getInt("stock_quantity");
-			String category  = rst.getString("category");
-			
-			ProductDto product = new ProductDto(name,description,price,offerPercent,stockQuanity,category);
+			String category = rst.getString("category");
+
+			ProductDto product = new ProductDto(name, description, price, offerPercent, stockQuanity, category);
 			list.add(product);
 		}
 
@@ -212,12 +205,8 @@ public class AdminDaoImpl implements AdminDao {
 	@Override
 	public List<ProductSalesDto> productSaleRecord() throws SQLException {
 		Connection con = DBConnection.dbConnect();
-		String sql ="select p.product_id , p.name,p.price,"
-				+ "sum(o.quantity)as num_product_purchased "
-				+ "from product p left join orders o "
-				+ "on p.product_id = o.product_id "
-				+ "group by p.product_id";
-		
+		String sql = "select p.product_id , p.name,p.price," + "sum(o.quantity)as num_product_purchased "
+				+ "from product p left join orders o " + "on p.product_id = o.product_id " + "group by p.product_id";
 
 		PreparedStatement pstmt = con.prepareStatement(sql);
 		ResultSet rst = pstmt.executeQuery();
@@ -228,8 +217,8 @@ public class AdminDaoImpl implements AdminDao {
 			String name = rst.getString("name");
 			double price = rst.getDouble("price");
 			int productSold = rst.getInt("num_product_purchased");
-			
-			ProductSalesDto product = new ProductSalesDto(productId,name,price,productSold);
+
+			ProductSalesDto product = new ProductSalesDto(productId, name, price, productSold);
 			list.add(product);
 		}
 
@@ -237,6 +226,5 @@ public class AdminDaoImpl implements AdminDao {
 		DBConnection.dbClose();
 		return list;
 	}
-	
 
 }

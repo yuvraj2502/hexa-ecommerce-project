@@ -21,4 +21,7 @@ public interface UserDao {
 	void updateVendorLogin(Vendor vendor)throws SQLException;
 
 	void updateUser(User updatedUser)throws SQLException;
+	
+	boolean isEmailAlreadyExist(String email) throws SQLException;
+
 }

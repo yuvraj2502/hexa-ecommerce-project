@@ -1,8 +1,7 @@
 package com.service;
 
 //Author = Yuvraj
-import java.sql.SQLException;
-import java.util.regex.Pattern;
+import java.sql.SQLException;	
 
 import com.dao.UserDao;
 import com.daoImpl.UserDaoImpl;
@@ -30,13 +29,14 @@ public class UserService {
 		return user;
 	}
 
-	
-
 	public void save(User user) throws SQLException, InvalidLoginInput {
 		
-		if (!LoginValidation.isValidEmail(user.getPassword()))
-			throw new InvalidLoginInput("Enter a correct Email address");
+		if(userDao.isEmailAlreadyExist(user.getEmail()))
+			throw new InvalidLoginInput("Email Already Exist. Try to enter another email id");
 		
+		if (!LoginValidation.isValidEmail(user.getEmail()))
+			throw new InvalidLoginInput("Enter a correct Email address");
+
 		if (!LoginValidation.passIsValid(user.getPassword()))
 			throw new InvalidLoginInput("Password must be of more than 5 digit");
 
@@ -60,7 +60,10 @@ public class UserService {
 		userDao.updateVendorLogin(vendor);
 	}
 
-	public void updateUser(User updatedUser) throws SQLException {
+	public void updateUser(User updatedUser) throws SQLException, InvalidLoginInput {
+
+		if (!LoginValidation.passIsValid(updatedUser.getPassword()))
+			throw new InvalidLoginInput("Password must be of more than 5 digit");
 		userDao.updateUser(updatedUser);
 	}
 
