@@ -46,26 +46,26 @@ public class CustomerController {
 		System.out.println("Customer ID: " + customerId);
 		
 		while (true) {
-            System.out.println("====================Customer Module====================");
-			System.out.println("Press 1:  Display Customer details");                                 //swarna
+            System.out.println("====================Customer Dashboard====================");
+			System.out.println("Press 1:  Customer Profile");                                         //swarna
 			System.out.println("press 2:  Display all products"); 
 			System.out.println("press 3:  Display products with a specific category");                //swarna
 			System.out.println("Press 4:  Display products between the specified price range");       //swarna
 			System.out.println("press 5:  View product by rating");                                   //sunitha
 			System.out.println("press 6:  Add Product to my Cart");                                   //swarna
-			System.out.println("press 7:  Display my Products in Cart");                              //swarna
+			System.out.println("press 7:  View my Products in Cart");                                 //swarna
 			System.out.println("press 8:  Delete Product from Cart");                                 //swarna
 			System.out.println("press 9:  Place order from Cart Items");                              //swarna
 			System.out.println("press 10: Place order from product");                                 //sunitha
 			System.out.println("press 11: Display my Order history");                                 //sunitha
-			System.out.println("press 12: Cancel my Order By SoftDelete");                            //sunitha
+			System.out.println("press 12: Cancel my Order (By SoftDelete)");                            //sunitha
 			System.out.println("press 13: View payment");                                             //sunitha
 			System.out.println("press 14: Make payment");                                             //sunitha
 			System.out.println("press 15: View Refund");                                              //sunitha
 			System.out.println("press 16: Write review");                                             //sunitha
 			System.out.println("press 17: OrderPaymentReview details");                               //sunitha
 			System.out.println("Press 18: Update Customer Address for existing customer");			  //swarna
-			System.out.println("Press 19: Add address if your a new Customer");                       //swarna
+			System.out.println("Press 19: Add address (if your a new Customer)");                       //swarna
 			System.out.println("press 0: Exit");
 			
 			
@@ -590,6 +590,7 @@ public class CustomerController {
 				int id =randomNumber<0?randomNumber*-1:randomNumber;
 				adr.setAddress_id(id);
 				adr.setCustomer_id(customerId);
+				sc.nextLine();
 				System.out.println("Enter Your Street");
 				adr.setStreet(sc.nextLine());
 				System.out.println("Enter Your City");
