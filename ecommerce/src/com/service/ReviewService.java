@@ -15,11 +15,11 @@ public class ReviewService {
 	public List<ListProductbyRatingDto> findprodcts(int rating_value)throws SQLException, ResourceNotFoundException {
 		// TODO Auto-generated method stub
          if(rating_value>5) {
-        	 throw new ResourceNotFoundException("Out of range");
+        	 throw new ResourceNotFoundException("Enter rating value betweem 1 to 5");
         	 
          }
          if(rating_value<1) {
-        	 throw new ResourceNotFoundException("less than range");
+        	 throw new ResourceNotFoundException("Enter rating value between 1 to 5");
          }
 		return dao.findproducts(rating_value);
 		}

@@ -163,7 +163,7 @@ public class CustomerController {
 				
 			case 5:
 				try {
-					System.out.println("Enter rating range:");
+					System.out.println("Enter rating value:");
 					int rating_value=sc.nextInt();
 					 List<ListProductbyRatingDto> listproduct=reviewService.findprodcts(rating_value);
 					
@@ -534,7 +534,7 @@ public class CustomerController {
 					
 				   
 				   reviewService.save(review);
-				   System.out.println("Artwork added to DB");
+				   System.out.println("Thanks for Writting Review");
 				}catch(SQLException e) {
 					System.out.println(e.getMessage());
 				}catch(ResourceNotFoundException e) {
@@ -590,6 +590,7 @@ public class CustomerController {
 				int id =randomNumber<0?randomNumber*-1:randomNumber;
 				adr.setAddress_id(id);
 				adr.setCustomer_id(customerId);
+				sc.nextLine();
 				System.out.println("Enter Your Street");
 				adr.setStreet(sc.nextLine());
 				System.out.println("Enter Your City");
