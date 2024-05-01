@@ -1,7 +1,7 @@
 package com.controller;
 // Author- Vibhuti Shrivastava
 import java.sql.SQLException;
-import com.model.Orders;
+import com.model.Order;
 import java.util.List;
 import java.util.Random;
 import java.util.Scanner;
@@ -150,8 +150,8 @@ public class VendorController {
 // 5. View Orders
 			case 5: // view all orders made by customer
 				try {
-					List<Orders> list = vendorService.findAllo();
-					for (Orders o : list) {
+					List<Order> list = vendorService.findAllo();
+					for (Order o : list) {
 						System.out.println(o);
 					}
 				} catch (SQLException e) {
@@ -162,8 +162,8 @@ public class VendorController {
 // 6. update status of order
 			case 6:
 				try {
-					List<Orders> list = vendorService.findAllo();
-					for (Orders o : list) {
+					List<Order> list = vendorService.findAllo();
+					for (Order o : list) {
 						System.out.println(o);
 					}
 				} catch (SQLException e) {

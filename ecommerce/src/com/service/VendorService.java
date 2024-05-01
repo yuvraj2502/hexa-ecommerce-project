@@ -1,5 +1,6 @@
 package com.service;
 //Author- Vibhuti Shrivastava
+
 import java.sql.SQLException;
 import java.util.List;
 
@@ -8,7 +9,7 @@ import com.daoImpl.VendorDaoImpl;
 import com.dto.PaymentDto;
 import com.dto.RefundDto;
 import com.exception.ResourceNotFoundException;
-import com.model.Orders;
+import com.model.Order;
 import com.model.Product;
 
 public class VendorService {
@@ -51,7 +52,7 @@ public class VendorService {
 
 	
 //5
-	public List<Orders> findAllo() throws SQLException{
+	public List<Order> findAllo() throws SQLException{
 		return dao.findAllo();
 	}
 
