@@ -124,7 +124,6 @@ public void softDeleteByid(int id) throws SQLException, ResourceNotFoundExceptio
 	DBConnection.dbClose();
 }
 
-
 @Override
 public boolean findorderforcustomer(int customerId, int orderid) throws SQLException, ResourceNotFoundException {
 	// TODO Auto-generated method stub
