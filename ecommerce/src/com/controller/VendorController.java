@@ -63,10 +63,10 @@ public class VendorController {
 				System.out.println("Enter Stock Quantity");
 				int stock_quantity = sc.nextInt();
 
-				System.out.println("Enter category id");
+				System.out.println("Enter category id(1.Electronics, 2.Grocery)");
 				int category_id = sc.nextInt();
 
-				System.out.println("enter Vendor id");
+				System.out.println("enter Vendor id(1.Vibhuti Electronics, 2. Retail Store)");
 				int vendor_id = sc.nextInt();
 
 				Product product = new Product(id, name, description, price, offer_percent, stock_quantity, category_id,
