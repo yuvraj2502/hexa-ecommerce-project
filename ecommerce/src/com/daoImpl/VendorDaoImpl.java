@@ -12,7 +12,7 @@ import com.dao.VendorDao;
 import com.dto.PaymentDto;
 import com.dto.RefundDto;
 import com.exception.ResourceNotFoundException;
-import com.model.Orders;
+import com.model.Order;
 import com.model.Product;
 import com.utility.DBConnection;
 
@@ -130,12 +130,12 @@ public class VendorDaoImpl implements VendorDao {
 	
 //5	
 	@Override                   
-	public List<Orders> findAllo() throws SQLException{
+	public List<Order> findAllo() throws SQLException{
 		Connection con = DBConnection.dbConnect();
 		String sql="select * from orders";
 		PreparedStatement pstmt = con.prepareStatement(sql);
 		ResultSet rst = pstmt.executeQuery();
-		List<Orders> list = new ArrayList<>();
+		List<Order> list = new ArrayList<>();
 		while(rst.next()== true) {
 			int id=rst.getInt("order_id");
 			int quantity=rst.getInt("quantity");
@@ -145,8 +145,8 @@ public class VendorDaoImpl implements VendorDao {
 			int custid=rst.getInt("customer_id");
 			int proid=rst.getInt("product_id");
 			
-			Orders orders=new Orders(id,quantity,order_date,status,totalPrice,custid,proid);
-			list.add(orders);
+			Order order=new Order(id,quantity,order_date,status,totalPrice,custid,proid);
+			list.add(order);
 		}
 		DBConnection.dbClose();
 		return list;

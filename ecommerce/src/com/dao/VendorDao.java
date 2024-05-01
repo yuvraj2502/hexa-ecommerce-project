@@ -7,7 +7,7 @@ import java.util.List;
 import com.dto.PaymentDto;
 import com.dto.RefundDto;
 import com.exception.ResourceNotFoundException;
-import com.model.Orders;
+import com.model.Order;
 import com.model.Product;
 
 public interface VendorDao {
@@ -24,7 +24,7 @@ public interface VendorDao {
 	boolean findOnep(int productId) throws SQLException,ResourceNotFoundException;//4
 
 	
-	List<Orders> findAllo() throws SQLException;   //5
+	List<Order> findAllo() throws SQLException;   //5
 	
 	void updateOrderStatus(int proId, String orderStatus)throws SQLException;   //6
 	
