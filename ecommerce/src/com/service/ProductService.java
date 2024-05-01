@@ -140,12 +140,7 @@ public class ProductService {
 		if (!isQuantityValid(order.getProduct_id(), order.getQuantity())) {
 		       
 		    }
-	
-		
-	}
-	
-	 
-	   
+	}   
 }
 	
 	

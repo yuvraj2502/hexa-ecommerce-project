@@ -547,11 +547,19 @@ public class CustomerController {
 				try {
 		           
                     List<OrderPaymentRefund> listdetails= orderService.fulldetailsregorder(customerId);
-                    for(OrderPaymentRefund r:listdetails) {
-                    	System.out.println(r);
+                    if(listdetails.isEmpty()) {
+                    	System.out.println("The Customer has no Orders");
                     }
+                    else {
+                    for(OrderPaymentRefund r:listdetails) {
+                    	
+                    	System.out.println(r);
+                    	
+                    }
+                    }
+                    
 		        } catch (SQLException e) {
-		            System.out.println("An error occurred while retrieving refund details: " + e.getMessage());
+		            System.out.println(e.getMessage());
 		        }catch(ResourceNotFoundException e) {
 		        	System.out.println(e.getMessage());
 		        }
