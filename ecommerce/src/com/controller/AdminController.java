@@ -10,8 +10,10 @@ import java.util.Scanner;
 import com.dto.CustomerDto;
 import com.dto.OrderStatsDto;
 import com.dto.ProductDto;
+import com.dto.ProductSalesDto;
 import com.dto.VendorDto;
 import com.exception.InvalidCustomerIdException;
+import com.exception.InvalidLoginInput;
 import com.exception.ResourceNotFoundException;
 import com.model.User;
 import com.model.Vendor;
@@ -36,7 +38,8 @@ public class AdminController {
 			System.out.println("5. Delete Vendor");
 			System.out.println("6. Show all products by vendorId");
 			System.out.println("7. Show Order Stats");
-			System.out.println("8. Logout");
+			System.out.println("8. Report of No of Products Sold");
+			System.out.println("9. Logout");
 			System.out.println();
 			System.out.print("Press a number to continue: ");
 
@@ -47,7 +50,7 @@ public class AdminController {
 				System.out.println();
 
 				// If logout break the loop
-				if (input == 8) {
+				if (input == 9) {
 					System.out.println("Thanks");
 					break;
 				}
@@ -135,6 +138,8 @@ public class AdminController {
 						adminService.save(vendor);
 						System.out.println("Vendor added successfully\n");
 					} catch (SQLException e) {
+						System.out.println(e.getMessage());
+					} catch (InvalidLoginInput e) {
 						System.out.println(e.getMessage());
 					}
 
@@ -276,6 +281,27 @@ public class AdminController {
 
 						System.out.println("+---------------+--------------------------------+---------------+");
 
+					} catch (SQLException e) {
+						System.out.println(e.getMessage());
+					}
+					break;
+				case 8:
+					try {
+						List<ProductSalesDto> product = adminService.productSale();
+						System.out.println(
+								"+--------------+---------------------------------+---------------+---------------+");
+						System.out.println(
+								"| Product ID   | Product Name                    | Price         | Products sales|");
+						System.out.println(
+								"+--------------+---------------------------------+---------------+---------------+");
+
+						for (ProductSalesDto p : product) {
+							System.out.printf("| %-12d | %-31s | %-13.2f | %-13d |%n", p.getProductId(), p.getName(),
+									p.getPrice(), p.getProductSold());
+						}
+
+						System.out.println(
+								"+--------------+---------------------------------+---------------+---------------+");
 					} catch (SQLException e) {
 						System.out.println(e.getMessage());
 					}

@@ -1,4 +1,7 @@
 package com.model;
+
+import java.util.Objects;
+
 //Author = Yuvraj
 public class User {
 	private int userId; 
@@ -52,6 +55,24 @@ public class User {
 	@Override
 	public String toString() {
 		return "User [userId=" + userId + ", email=" + email + ", password=" + password + ", role=" + role + "]";
+	}
+
+	@Override
+	public int hashCode() {
+		return Objects.hash(userId,email, password, role);
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		User other = (User) obj;
+		return Objects.equals(email, other.email) && Objects.equals(password, other.password)
+				&& Objects.equals(role, other.role) && userId == other.userId;
 	}
 	
 	
