@@ -1,5 +1,5 @@
 package com.service;
-//author - swarna & sunitha
+//AUTHOR=SUNITHA AND SWARNALAKSHMI
 import java.sql.SQLException;
 import java.util.List;
 import com.dao.PaymentDao;
@@ -39,19 +39,17 @@ public List<Order> findAll(int customerId)throws SQLException, ResourceNotFoundE
 
 	return dao.findAll(customerId);
 }
-public void softDeleteByid(int customerid,int orderid) throws SQLException, ResourceNotFoundException {
+public void softDeleteByid(int customerId,int orderid) throws SQLException, ResourceNotFoundException {
 	// TODO Auto-generated method stub
-	boolean isIdValid= dao.findorderforcustomer(customerid,orderid);
-	if(!isIdValid)
+    //boolean isIdValid= dao.findorderforcustomer(customerid,orderid);
+	if(!findorderforcustomer(customerId,orderid))
 		throw new ResourceNotFoundException("Id given id invalid!!");
 	dao.softDeleteByid(orderid);
 
 }
 public boolean findorderforcustomer(int customerId, int order_id) throws SQLException, ResourceNotFoundException {
 	// TODO Auto-generated method stub
-	boolean isIdValid= dao.findorderforcustomer(customerId,order_id);
-	if(!isIdValid)
-		throw new ResourceNotFoundException("Id given id invalid!!");
+	
 	return dao.findorderforcustomer(customerId, order_id);
 }
 public List<OrderPaymentRefund> fulldetailsregorder(int customerId) throws ResourceNotFoundException, SQLException {
