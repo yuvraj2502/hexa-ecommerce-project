@@ -7,6 +7,7 @@ import java.util.Random;
 import java.util.Scanner;
 
 import com.exception.InvalidCredentialsException;
+import com.exception.InvalidLoginInput;
 import com.model.Customer;
 import com.model.User;
 import com.model.Vendor;
@@ -20,12 +21,15 @@ public class LoginController {
 
 		while (true) {
 			try {
-				System.out.println("\nWelcome to the Ecommerce.\n");
-				System.out.println("Press 1. Sign up");
+				System.out.println("\n==========================================");
+				System.out.println("        Welcome to the Ecommerce   ");
+				System.out.println("==========================================\n");
+				System.out.println("Press 1. Customer Sign up");
 				System.out.println("Press 2. Login");
 				System.out.println("Press 0. Exit");
 				System.out.print("Enter a number to continue : ");
 				int input = sc.nextInt();
+				System.out.println();
 				if (input == 0) {
 					System.out.println("Exiting Eccomerce Application.");
 					break;
@@ -43,39 +47,41 @@ public class LoginController {
 
 					sc.nextLine();
 					System.out.print("Enter Name : ");
-					String customerName = sc.nextLine();
+					String customerName = sc.nextLine().trim();
 
 					System.out.print("Enter Email : ");
-					String customerEmail = sc.next();
+					String customerEmail = sc.next().trim();
 
 					System.out.print("Enter Password : ");
-					String customerPassword = sc.next();
+					String customerPassword = sc.next().trim();
 
+					// Creating User
 					User user = new User(userId, customerEmail, customerPassword, "customer");
 					userService.save(user);
 
+					// Creating Customer
 					Customer customer = new Customer(custId, customerName, userId);
 
 					int status = userService.insert(customer);
 					if (status == 1) {
-						System.out.println("\nCustomer added successfully");
+						System.out.println("\nSignup Done Successfully");
 					} else {
-						System.out.println("Operation failed");
+						System.out.println("Oops! Something went wrong. Please try again");
 					}
 
 					break;
 				case 2:
 
-					System.out.print("\nEnter Email: ");
+					System.out.print("Enter Email: ");
 					sc.nextLine();
-					String email = sc.next();
+					String email = sc.next().trim();
 					System.out.print("Enter password: ");
-					String password = sc.next();
+					String password = sc.next().trim();
 
 					User userObj = userService.login(email, password);
-					int customerId = userService.getCustomerIdByUserId(userObj.getUserId()); // customer module
+
 					if (userObj.getRole().equalsIgnoreCase("CUSTOMER")) {
-						System.out.println("Customer Menu");
+						int customerId = userService.getCustomerIdByUserId(userObj.getUserId()); // customer module
 						CustomerController.customerMenu(customerId);
 					} else if (userObj.getRole().equalsIgnoreCase("VENDOR")) {
 						Vendor vendor = userService.getVendor(userObj.getUserId());
@@ -85,10 +91,11 @@ public class LoginController {
 							System.out.print("Enter new password: ");
 							String pass = sc.next();
 							userObj.setPassword(pass);
-							
-							User updatedUser = new User(userObj.getUserId(), userObj.getEmail(), userObj.getPassword(),userObj.getRole());
+
+							User updatedUser = new User(userObj.getUserId(), userObj.getEmail(), userObj.getPassword(),
+									userObj.getRole());
 							userService.updateUser(updatedUser);
-							
+
 							vendor.setLoginFirst(false);
 							userService.updateVendorLogin(vendor);
 							System.out.println("Password Reset Successfully");
@@ -96,25 +103,23 @@ public class LoginController {
 
 							break;
 						}
-
-						System.out.println("Vendor Menu");
 						VendorController.vendorMenu();
 					} else {
-						System.out.println("Admin Menu");
 						AdminController.adminMenu();
 					}
-
 					break;
 				default:
 					System.out.println("Invalid input given, try again later!!!");
 				}
 			} catch (InputMismatchException e) {
 				System.out.println("Invalid input. Please enter a valid number.");
-			    sc.next(); 
-			    continue; 
+				sc.next();
+				continue;
 			} catch (SQLException e) {
 				System.out.println(e.getMessage());
 			} catch (InvalidCredentialsException e) {
+				System.out.println(e.getMessage());
+			}catch (InvalidLoginInput e) {
 				System.out.println(e.getMessage());
 			}
 		}

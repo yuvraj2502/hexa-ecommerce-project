@@ -10,6 +10,7 @@ import com.dao.AdminDao;
 import com.dto.CustomerDto;
 import com.dto.OrderStatsDto;
 import com.dto.ProductDto;
+import com.dto.ProductSalesDto;
 import com.dto.VendorDto;
 import com.exception.ResourceNotFoundException;
 import com.model.Vendor;
@@ -200,6 +201,35 @@ public class AdminDaoImpl implements AdminDao {
 			String category  = rst.getString("category");
 			
 			ProductDto product = new ProductDto(name,description,price,offerPercent,stockQuanity,category);
+			list.add(product);
+		}
+
+		pstmt.executeQuery();
+		DBConnection.dbClose();
+		return list;
+	}
+
+	@Override
+	public List<ProductSalesDto> productSaleRecord() throws SQLException {
+		Connection con = DBConnection.dbConnect();
+		String sql ="select p.product_id , p.name,p.price,"
+				+ "sum(o.quantity)as num_product_purchased "
+				+ "from product p left join orders o "
+				+ "on p.product_id = o.product_id "
+				+ "group by p.product_id";
+		
+
+		PreparedStatement pstmt = con.prepareStatement(sql);
+		ResultSet rst = pstmt.executeQuery();
+
+		List<ProductSalesDto> list = new ArrayList<>();
+		while (rst.next()) {
+			int productId = rst.getInt("product_id");
+			String name = rst.getString("name");
+			double price = rst.getDouble("price");
+			int productSold = rst.getInt("num_product_purchased");
+			
+			ProductSalesDto product = new ProductSalesDto(productId,name,price,productSold);
 			list.add(product);
 		}
 
