@@ -36,5 +36,5 @@ public interface AdminDao {
 	List<OrderStatsDto> getOrderStats() throws SQLException;
 
 	List<ProductSalesDto> productSaleRecord() throws SQLException;
-
+	
 }
