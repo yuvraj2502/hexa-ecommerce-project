@@ -39,7 +39,7 @@ public class AdminDaoImpl implements AdminDao {
 			list.add(customer);
 		}
 
-		pstmt.executeQuery();
+		
 		DBConnection.dbClose();
 		return list;
 	}
@@ -65,7 +65,7 @@ public class AdminDaoImpl implements AdminDao {
 			list.add(vendor);
 		}
 
-		pstmt.executeQuery();
+	
 		DBConnection.dbClose();
 		return list;
 	}
@@ -120,7 +120,7 @@ public class AdminDaoImpl implements AdminDao {
 			list.add(orders);
 		}
 
-		pstmt.executeQuery();
+		
 		DBConnection.dbClose();
 		return list;
 	}
@@ -197,7 +197,7 @@ public class AdminDaoImpl implements AdminDao {
 			list.add(product);
 		}
 
-		pstmt.executeQuery();
+		
 		DBConnection.dbClose();
 		return list;
 	}
@@ -222,7 +222,7 @@ public class AdminDaoImpl implements AdminDao {
 			list.add(product);
 		}
 
-		pstmt.executeQuery();
+		
 		DBConnection.dbClose();
 		return list;
 	}
